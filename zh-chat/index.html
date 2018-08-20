@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/header.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	
+      	
+      	mui.plusReady(function(){
+      		plus.navigator.setStatusBarBackground("#007AFF");
+      		plus.navigator.setStatusBarStyle("light");
+      	});
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav title">
+	    <h1 class="mui-title title-color" id="qq_title"><b>QQ<b></h1>
+	</header>
+	
+	<nav class="mui-bar mui-bar-tab">
+	    <a class="mui-tab-item mui-active" tabindex="0">
+	        <span class="mui-icon mui-icon-chatbubble"></span>
+	        <span class="mui-tab-label">消息</span>
+	    </a>
+	    <a class="mui-tab-item" tabindex="1">
+	        <span class="mui-icon mui-icon-person"></span>
+	        <span class="mui-tab-label">联系人</span>
+	    </a>
+	    <a class="mui-tab-item" tabindex="2">
+	        <span class="mui-icon mui-icon-star"></span>
+	        <span class="mui-tab-label">动态</span>
+	    </a>
+	    <a class="mui-tab-item" tabindex="3">
+	        <span class="mui-icon mui-icon-qq"></span>
+	        <span class="mui-tab-label">我</span>
+	    </a>
+	</nav>
+	
+	<script type="text/javascript">
+		var qqArray = [
+		{
+			pageId:"chatlist.html",
+			pageUrl:"chatlist.html"
+		},
+		{
+			pageId:"contact.html",
+			pageUrl:"contact.html"
+		},
+		{
+			pageId:"discover.html",
+			pageUrl:"discover.html"
+		},
+		{
+			pageId:"me.html",
+			pageUrl:"me.html"
+		}
+		];
+		
+		
+		//选项卡中每个页面指定位置大小
+		var qqStyle = {
+			top:"44px",
+			bottom:"50px"
+		}
+		
+		
+		mui.plusReady(function(){
+			//禁止返回登陆注册页面
+			mui.back = function(){
+				return false;
+			}
+			
+			//对网络链接进行监听
+			netChangeSwitch();
+			
+			//获取当前webview对象
+			var indexWebview = plus.webview.currentWebview();
+			
+			//向当前的主页的webview对像追加子页的4张webview对象
+			for(var i = 0; i < qqArray.length; i++){
+				var qqPage = plus.webview.create(qqArray[i].pageUrl,qqArray[i].pageId,qqStyle);
+				qqPage.hide();//隐藏webview窗口
+				//追加子页面到主页面
+				indexWebview.append(qqPage);
+			}
+//			plus.webview.show(qqArray[0].pageId);
+			
+			
+			
+			
+			//批量绑定tab事件  展示不同的页面
+			mui(".mui-bar-tab").on("tap","a",function(){
+				var tabindex = this.getAttribute("tabindex");
+				
+				//显示点击tab对应的页面
+				plus.webview.show(qqArray[tabindex].pageId,"fade-in",200);
+				
+				
+				//隐藏其他的不需要的页面
+				for(var i = 0; i < qqArray.length; i++){
+					if(i != tabindex){
+						plus.webview.hide(qqArray[i].pageId,"fade-out",200);
+					}
+			}
+				
+			});
+			
+			
+			// 延时加载
+			setTimeout("initData()", "1000");
+			
+		});
+		
+		// 预加载
+		function initData(){
+				var chatlist = plus.webview.getWebviewById("chatlist.html");
+				mui.fire(chatlist,"refresh");
+				
+				var me = plus.webview.getWebviewById("me.html");
+				mui.fire(me,"refresh");
+			}
+		
+		//监听网络状态更改
+		function netChangeSwitch(){
+			document.addEventListener("netchange",function(){
+				// 网络的状态判断获取
+				var connectionStatus = plus.networkinfo.getCurrentType();
+				console.log(connectionStatus);
+					if(connectionStatus != 0 || connectionStatus != 1){
+						//重新打开网络链接
+						var qq_title = document.getElementById("qq_title");
+						qq_title.innerHTML = "<b>QQ<b>";
+					}else{
+						//关闭网络
+						var qq_title = document.getElementById("qq_title");
+						qq_title.innerHTML = "<b>QQ(未链接)<b>";
+					}
+			});
+		}
+	</script>
+	
+</body>
+</html>

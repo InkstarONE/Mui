@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/header.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	
+      	
+      	mui.plusReady(function(){
+      		plus.navigator.setStatusBarBackground("#007AFF");
+      		plus.navigator.setStatusBarStyle("light");
+      	});
+    </script>
+	</head>
+	<body>
+		<h1>动态</h1>
+		<div class="mui-content">
+		    <ul class="mui-table-view">
+		        <li class="mui-table-view-cell mui-media">
+		           
+		                <img class="mui-media-object mui-pull-left" src="image/friends.png" style="max-width: 24px; max-height: 24px;">
+		              
+		                    <p class="mui-ellipsis" style="line-height: 24px;color: #000000;font-size: 16px;">
+		                    		<span style="margin-left: 10px;">空间</span>
+		                    </p>
+		              
+		            </a>
+		        </li>
+		        </ul>
+		        
+		        
+		        <br />
+		        
+		        <ul class="mui-table-view">
+		        <li id="li_add_friends"  class="mui-table-view-cell mui-media">
+		           
+		                <img class="mui-media-object mui-pull-left" src="image/addfriends.png" style="max-width: 24px; max-height: 24px;">
+		              
+		                    <p class="mui-ellipsis" style="line-height: 24px;color: #000000;font-size: 16px;">
+		                    		<span style="margin-left: 10px;">添加好友</span>
+		                    </p>
+		              
+		            </a>
+		        </li>
+		        
+		        <li id="li_scanme" class="mui-table-view-cell mui-media">
+		           
+		                <img class="mui-media-object mui-pull-left" src="image/scanscan.png" style="max-width: 24px; max-height: 24px;">
+		              
+		                    <p class="mui-ellipsis" style="line-height: 24px;color: #000000;font-size: 16px;">
+		                    		<span style="margin-left: 10px;">扫一扫</span>
+		                    </p>
+		              
+		            </a>
+		        </li>
+		        
+		        <li id="admin_notice" class="mui-table-view-cell mui-media">
+		           
+		                <img class="mui-media-object mui-pull-left mui-icon mui-icon-email"  style="max-width: 24px; max-height: 24px;">
+		              
+		                    <p class="mui-ellipsis" style="line-height: 24px;color: #000000;font-size: 16px;">
+		                    		<span style="margin-left: 10px;">
+		                    			<span class="mui-icon mui-icon mui-icon-email"></span>
+		                    			通知</span>
+		                    </p>
+		              
+		            </a>
+		        </li>
+		        
+		        <li id="admin" class="mui-table-view-cell mui-media">
+		           
+		                <img class="mui-media-object mui-pull-left mui-icon mui-icon-email"  style="max-width: 24px; max-height: 24px;">
+		              
+		                    <p class="mui-ellipsis" style="line-height: 24px;color: #000000;font-size: 16px;">
+		                    		<span style="margin-left: 10px;">
+		                    			<span class="mui-icon mui-icon mui-icon mui-icon-compose"></span>
+		                    			管理下</span>
+		                    </p>
+		              
+		            </a>
+		        </li>
+		       
+		        
+		    </ul>
+		</div>
+		
+		
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				var li_add_friends = document.getElementById("li_add_friends");
+				li_add_friends.addEventListener("tap",function(){
+					mui.openWindow("searchfriends.html","searchfriends.html");
+				});
+				
+				var admin_notice = document.getElementById("admin_notice");
+				admin_notice.addEventListener("tap",function(){
+				mui.openWindow("admin_notice.html","admin_notice.html");
+				});
+				
+				var admin = document.getElementById("admin");
+				admin.addEventListener("tap",function(){
+				mui.openWindow("admin.html","admin.html");
+				});
+				
+				var li_scanme = document.getElementById("li_scanme");
+				li_scanme.addEventListener("tap", function(){
+					mui.openWindow("scanme.html","scanme.html");
+				});
+			});
+		</script>
+		
+	</body>
+</html>
